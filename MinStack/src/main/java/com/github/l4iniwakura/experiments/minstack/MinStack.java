@@ -31,5 +31,4 @@ public class MinStack {
     public int getMin() {
         return minValues.isEmpty() ? 0 : minValues.peek();
     }
-
 }
