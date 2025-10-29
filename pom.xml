@@ -3,6 +3,10 @@
     <groupId>com.github.l4iniwakura.experiments</groupId>
     <artifactId>Experiments-Lain</artifactId>
     <version>1.0</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>LRUCache</module>
+    </modules>
 
     <properties>
         <maven.compiler.target>22</maven.compiler.target>
