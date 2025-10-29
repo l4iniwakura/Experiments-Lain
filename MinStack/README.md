@@ -13,7 +13,7 @@ You must implement a solution with O(1) time complexity for each function.
 
 Example 1:
 
-Input
+```Input
 ["MinStack","push","push","push","getMin","pop","top","getMin"]
 [[],[-2],[0],[-3],[],[],[],[]]
 
@@ -29,6 +29,7 @@ minStack.getMin(); // return -3
 minStack.pop();
 minStack.top(); // return 0
 minStack.getMin(); // return -2
+```
 
 Constraints:
 ```
