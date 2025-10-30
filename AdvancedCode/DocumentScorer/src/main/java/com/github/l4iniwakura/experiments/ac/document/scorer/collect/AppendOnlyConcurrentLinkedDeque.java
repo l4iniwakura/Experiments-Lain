@@ -1,9 +1,11 @@
 package com.github.l4iniwakura.experiments.ac.document.scorer.collect;
 
+import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collection;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.function.Predicate;
 
+@ThreadSafe
 public class AppendOnlyConcurrentLinkedDeque<E> extends ConcurrentLinkedDeque<E> {
     @Override
     public boolean remove(Object o) {

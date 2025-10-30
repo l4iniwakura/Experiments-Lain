@@ -1,31 +1,26 @@
 package com.github.l4iniwakura.experiments.ac.document.scorer.service;
 
-import com.github.l4iniwakura.experiments.ac.document.scorer.collect.AppendOnlyConcurrentLinkedDeque;
+import com.github.l4iniwakura.experiments.ac.document.scorer.collect.AppendOnlyCopyOnWriteArrayList;
 import com.github.l4iniwakura.experiments.ac.document.scorer.domain.Document;
 import com.github.l4iniwakura.experiments.ac.document.scorer.domain.User;
 import com.github.l4iniwakura.experiments.ac.document.scorer.domain.WeighedEntity;
 
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.List;
 import java.util.PriorityQueue;
 
 public class HeapifyRecommenderService implements TRecommenderService<Document, User> {
-
-    private final Deque<Document> storage;
+    private final List<Document> storage;
     private final TScorer<Document, User> scorer;
 
     public HeapifyRecommenderService(TScorer<Document, User> scorer) {
-        this.storage = new AppendOnlyConcurrentLinkedDeque<>();
+        this.storage = new AppendOnlyCopyOnWriteArrayList<>();
         this.scorer = scorer;
     }
 
     @Override
     public List<Document> getTop(User user, int limit) {
         int size = storage.size();
-        for (Document document : storage) {
-            
-        }
         var heapify = storage.subList(0, Math.min(limit, size))
                 .stream()
                 .map(document -> new WeighedEntity<>(document, scorer.getScore(document, user)))
