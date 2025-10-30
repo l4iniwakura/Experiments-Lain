@@ -12,12 +12,27 @@
     <properties>
         <maven.compiler.target>22</maven.compiler.target>
         <maven.compiler.source>22</maven.compiler.source>
-
+        <!--UTILS-->
+        <caffeine.version>3.2.0</caffeine.version>
+        <guava.version>33.5.0-jre</guava.version>
+        <!--TESTS-->
         <junit.version>5.12.2</junit.version>
         <mockito.version>5.17.0</mockito.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>${caffeine.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
