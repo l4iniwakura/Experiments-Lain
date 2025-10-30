@@ -8,8 +8,14 @@
         <artifactId>Experiments-Lain</artifactId>
         <version>1.0</version>
     </parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>LRUCache</module>
+        <module>MinStack</module>
+    </modules>
 
-    <artifactId>LRUCache</artifactId>
+    <groupId>com.github.l4iniwakura.experiments.ac</groupId>
+    <artifactId>AdvancedCode</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>

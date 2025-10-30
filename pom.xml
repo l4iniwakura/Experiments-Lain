@@ -5,8 +5,8 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>LRUCache</module>
-        <module>MinStack</module>
+        <module>AdvancedCode</module>
+        <module>AdvancedCode/ATM</module>
     </modules>
 
     <properties>
