@@ -12,6 +12,14 @@
     <modules>
         <module>LRUCache</module>
         <module>MinStack</module>
+        <module>ATM</module>
+        <module>DocumentProcessor</module>
+        <module>DocumentScorer</module>
+        <module>NotificationFilter</module>
+        <module>LimitCheckSystem</module>
+        <module>ATMextended</module>
+        <module>OnlineShop</module>
+        <module>ShopCartAndDiscounts</module>
     </modules>
 
     <groupId>com.github.l4iniwakura.experiments.ac</groupId>
