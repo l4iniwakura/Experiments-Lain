@@ -6,7 +6,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>AdvancedCode</module>
-        <module>AdvancedCode/ATM</module>
     </modules>
 
     <properties>
