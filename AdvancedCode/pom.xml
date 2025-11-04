@@ -19,7 +19,6 @@
         <module>LimitCheckSystem</module>
         <module>ATMextended</module>
         <module>OnlineShop</module>
-        <module>ShopCartAndDiscounts</module>
         <module>FeedViewCounter</module>
     </modules>
 
