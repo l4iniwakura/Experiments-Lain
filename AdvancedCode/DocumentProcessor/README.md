@@ -19,3 +19,63 @@ class TProcessor {
 - Поле PubDate должно быть таким, каким было у сообщения с наименьшим FetchTime
 - Поле FirstFetchTime должно быть равно минимальному значению FetchTime
 - Т. е. в каждый момент времени мы берем PubDate и FirstFetchTime от самой первой из полученных на данный момент версий (если отсортировать их по FetchTime), а Text - от самой последней версии.
+
+Примерное решение
+
+```java
+import java.util.concurrent.ConcurrentHashMap;
+
+class TDocument {
+    public String Url;
+    public long PubDate;
+    public long FetchTime;
+    public String Text;
+    public long FirstFetchTime;
+}
+
+class TProcessor {
+    // Храним состояние по каждому Url
+    private final ConcurrentHashMap<String, State> states = new ConcurrentHashMap<>();
+
+    public TDocument Process(TDocument input) {
+        State s = states.compute(input.Url, (url, prev) -> {
+            if (prev == null) return new State(input);
+
+            // обновляем минимумы/максимумы
+            if (input.FetchTime < prev.minFetchTime) {
+                prev.minFetchTime = input.FetchTime;
+                prev.pubDate = input.PubDate;
+            }
+            if (input.FetchTime > prev.maxFetchTime) {
+                prev.maxFetchTime = input.FetchTime;
+                prev.text = input.Text;
+            }
+            return prev;
+        });
+
+        // формируем итоговый документ
+        TDocument result = new TDocument();
+        result.Url = input.Url;
+        result.PubDate = s.pubDate;
+        result.FetchTime = s.maxFetchTime;
+        result.Text = s.text;
+        result.FirstFetchTime = s.minFetchTime;
+        return result;
+    }
+
+    private static class State {
+        long minFetchTime;
+        long maxFetchTime;
+        long pubDate;
+        String text;
+
+        State(TDocument doc) {
+            this.minFetchTime = doc.FetchTime;
+            this.maxFetchTime = doc.FetchTime;
+            this.pubDate = doc.PubDate;
+            this.text = doc.Text;
+        }
+    }
+}
+
+```
