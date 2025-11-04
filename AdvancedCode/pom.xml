@@ -20,7 +20,6 @@
         <module>ATMextended</module>
         <module>OnlineShop</module>
         <module>ShopCartAndDiscounts</module>
-        <module>DemoDeque</module>
         <module>FeedViewCounter</module>
     </modules>
 
