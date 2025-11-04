@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class TimeService implements ITimeService {
-
     public static final Period ONE_DAY = Period.ofDays(1);
     private final Clock clock;
 

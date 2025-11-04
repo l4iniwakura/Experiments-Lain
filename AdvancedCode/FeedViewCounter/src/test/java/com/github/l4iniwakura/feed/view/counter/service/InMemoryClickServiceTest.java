@@ -70,9 +70,8 @@ class InMemoryClickServiceTest {
     }
 
     @Test
-    void whenNoDataCalculateMethodShouldNotReturnAnything() {
-        var expected = AuthorMetric.empty();
-        assertEquals(expected, iClickService.calculateMetric(List.of()));
+    void shouldReturnEmptyMetricWhenAuthorListIsEmpty() {
+        assertEquals(AuthorMetric.empty(), iClickService.calculateMetric(List.of()));
     }
 
     @Test

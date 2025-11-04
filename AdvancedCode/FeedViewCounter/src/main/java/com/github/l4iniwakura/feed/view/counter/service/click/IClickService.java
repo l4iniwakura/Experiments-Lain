@@ -7,6 +7,5 @@ import java.util.UUID;
 
 public interface IClickService {
     void processClickEvent(UUID userId, UUID authorId);
-
     AuthorMetric calculateMetric(List<UUID> authrIdList);
 }
