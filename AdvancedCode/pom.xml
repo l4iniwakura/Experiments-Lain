@@ -20,6 +20,7 @@
         <module>ATMextended</module>
         <module>OnlineShop</module>
         <module>ShopCartAndDiscounts</module>
+        <module>FeedViewCounter</module>
     </modules>
 
     <groupId>com.github.l4iniwakura.experiments.ac</groupId>
