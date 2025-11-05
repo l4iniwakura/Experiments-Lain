@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class InMemoryClickServiceTest {
@@ -44,8 +45,8 @@ class InMemoryClickServiceTest {
 
     @BeforeEach
     void DefaultSetup() {
-        Mockito.when(clock.instant()).thenReturn(baseTime);
-        Mockito.when(clock.getZone()).thenReturn(ZoneId.of("UTC"));
+        Mockito.lenient().when(clock.instant()).thenReturn(baseTime);
+        Mockito.lenient().when(clock.getZone()).thenReturn(ZoneId.of("UTC"));
         hitCounterCash = new UserClickHitCounterCache();
         timeService = Mockito.spy(new TimeService(clock));
         iClickService = new InMemoryClickService(timeService, hitCounterCash);
@@ -110,6 +111,6 @@ class InMemoryClickServiceTest {
 
     private void skipOneDay() {
         var nextDay = clock.instant().plus(1, ChronoUnit.DAYS);
-        Mockito.when(clock.instant()).thenReturn(nextDay);
+        when(clock.instant()).thenReturn(nextDay);
     }
 }
