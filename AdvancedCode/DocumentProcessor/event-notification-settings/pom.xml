@@ -9,19 +9,20 @@
         <version>1.0</version>
     </parent>
 
-    <modules>
-        <module>domain</module>
-        <module>event-notification-filter</module>
-        <module>event-notification-history</module>
-        <module>event-notification-settings</module>
-    </modules>
-
-    <artifactId>DocumentProcessor</artifactId>
+    <artifactId>event-notification-settings</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
         <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.l4iniwakura.experiments.ac</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

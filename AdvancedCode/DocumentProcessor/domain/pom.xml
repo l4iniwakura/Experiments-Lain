@@ -9,14 +9,7 @@
         <version>1.0</version>
     </parent>
 
-    <modules>
-        <module>domain</module>
-        <module>event-notification-filter</module>
-        <module>event-notification-history</module>
-        <module>event-notification-settings</module>
-    </modules>
-
-    <artifactId>DocumentProcessor</artifactId>
+    <artifactId>domain</artifactId>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>
