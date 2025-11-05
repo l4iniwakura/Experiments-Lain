@@ -1,4 +1,4 @@
-package com.github.l4iniwakura.feed.view.counter.domain;
+package com.github.l4iniwakura.feed.view.counter.common;
 
 import java.util.Map;
 import java.util.UUID;

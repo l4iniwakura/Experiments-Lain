@@ -1,9 +1,10 @@
 package com.github.l4iniwakura.feed.view.counter.service;
 
-import com.github.l4iniwakura.feed.view.counter.core.AuthorStatisticKey;
-import com.github.l4iniwakura.feed.view.counter.domain.AuthorMetric;
+import com.github.l4iniwakura.feed.view.counter.common.ClickEvent;
+import com.github.l4iniwakura.feed.view.counter.domain.AuthorStatisticKey;
+import com.github.l4iniwakura.feed.view.counter.common.AuthorMetric;
 import com.github.l4iniwakura.feed.view.counter.repository.HitCounterCache;
-import com.github.l4iniwakura.feed.view.counter.repository.UserClickHitCounterCache;
+import com.github.l4iniwakura.feed.view.counter.repository.InMemoryUserClickHitCounterCache;
 import com.github.l4iniwakura.feed.view.counter.service.click.InMemoryClickService;
 import com.github.l4iniwakura.feed.view.counter.service.time.TimeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,14 +48,14 @@ class InMemoryClickServiceTest {
     void DefaultSetup() {
         Mockito.lenient().when(clock.instant()).thenReturn(baseTime);
         Mockito.lenient().when(clock.getZone()).thenReturn(ZoneId.of("UTC"));
-        hitCounterCash = new UserClickHitCounterCache();
+        hitCounterCash = new InMemoryUserClickHitCounterCache();
         timeService = Mockito.spy(new TimeService(clock));
         iClickService = new InMemoryClickService(timeService, hitCounterCash);
     }
 
     @Test
     void processClickEventShouldWorkCorrectly() {
-        iClickService.processClickEvent(USER_1, AUTHOR_1);
+        iClickService.processClickEvent(ClickEvent.of(USER_1, AUTHOR_1));
         skipOneDay();
         var expected = new AuthorMetric(Map.of(AUTHOR_1, 1));
         assertEquals(expected, iClickService.calculateMetric(List.of(AUTHOR_1)));
@@ -62,9 +63,9 @@ class InMemoryClickServiceTest {
 
     @Test
     void calculateMethodShouldReturnCorrectStatistic() {
-        iClickService.processClickEvent(USER_1, AUTHOR_1);
-        iClickService.processClickEvent(USER_2, AUTHOR_1);
-        iClickService.processClickEvent(USER_3, AUTHOR_1);
+        iClickService.processClickEvent(ClickEvent.of(USER_1, AUTHOR_1));
+        iClickService.processClickEvent(ClickEvent.of(USER_2, AUTHOR_1));
+        iClickService.processClickEvent(ClickEvent.of(USER_3, AUTHOR_1));
         skipOneDay();
         var expected = new AuthorMetric(Map.of(AUTHOR_1, 3));
         assertEquals(expected, calculateMetric(AUTHOR_1));
@@ -77,8 +78,8 @@ class InMemoryClickServiceTest {
 
     @Test
     void processClickIgnoreDuplicates() {
-        iClickService.processClickEvent(USER_1, AUTHOR_1);
-        iClickService.processClickEvent(USER_1, AUTHOR_1);
+        iClickService.processClickEvent(ClickEvent.of(USER_1, AUTHOR_1));
+        iClickService.processClickEvent(ClickEvent.of(USER_1, AUTHOR_1));
         skipOneDay();
         var expected = new AuthorMetric(Map.of(AUTHOR_1, 1));
         assertEquals(expected, calculateMetric(AUTHOR_1));
@@ -86,14 +87,14 @@ class InMemoryClickServiceTest {
 
     @Test
     void multiAuthorStatisticShouldWorkCorrectly() {
-        iClickService.processClickEvent(USER_1, AUTHOR_1);
-        iClickService.processClickEvent(USER_1, AUTHOR_2);
-        iClickService.processClickEvent(USER_1, AUTHOR_3);
+        iClickService.processClickEvent(ClickEvent.of(USER_1, AUTHOR_1));
+        iClickService.processClickEvent(ClickEvent.of(USER_1, AUTHOR_2));
+        iClickService.processClickEvent(ClickEvent.of(USER_1, AUTHOR_3));
 
-        iClickService.processClickEvent(USER_2, AUTHOR_2);
-        iClickService.processClickEvent(USER_2, AUTHOR_3);
+        iClickService.processClickEvent(ClickEvent.of(USER_2, AUTHOR_2));
+        iClickService.processClickEvent(ClickEvent.of(USER_2, AUTHOR_3));
 
-        iClickService.processClickEvent(USER_3, AUTHOR_3);
+        iClickService.processClickEvent(ClickEvent.of(USER_3, AUTHOR_3));
 
         skipOneDay();
 

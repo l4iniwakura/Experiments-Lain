@@ -1,7 +1,7 @@
 package com.github.l4iniwakura.feed.view.counter.repository;
 
 import com.github.l4iniwakura.feed.view.counter.AbstractIntegrationTest;
-import com.github.l4iniwakura.feed.view.counter.core.AuthorStatisticKey;
+import com.github.l4iniwakura.feed.view.counter.domain.AuthorStatisticKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -14,7 +14,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
-class RedisClickHitCounterCacheTest extends AbstractIntegrationTest {
+class RedisUserClickHitCounterCacheTest extends AbstractIntegrationTest {
 
     private final static UUID AUTHOR_1 = UUID.fromString("00000000-0000-0000-0000-000000000001");
     private final static UUID USER_1 = UUID.fromString("10000000-0000-0000-0000-000000000000");
@@ -23,7 +23,7 @@ class RedisClickHitCounterCacheTest extends AbstractIntegrationTest {
 
     @BeforeEach
     void initCache() {
-        cache = new RedisClickHitCounterCache(redisClient());
+        cache = new RedisUserClickHitCounterCache(redisClient());
     }
 
     @Test

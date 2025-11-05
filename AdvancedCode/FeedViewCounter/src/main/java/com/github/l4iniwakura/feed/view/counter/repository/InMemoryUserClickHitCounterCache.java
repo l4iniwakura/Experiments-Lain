@@ -1,6 +1,6 @@
 package com.github.l4iniwakura.feed.view.counter.repository;
 
-import com.github.l4iniwakura.feed.view.counter.core.AuthorStatisticKey;
+import com.github.l4iniwakura.feed.view.counter.domain.AuthorStatisticKey;
 
 import javax.annotation.concurrent.ThreadSafe;
 import java.util.Collections;
@@ -12,16 +12,16 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Predicate;
 
 @ThreadSafe
-public class UserClickHitCounterCache implements HitCounterCache<AuthorStatisticKey, UUID> {
+public class InMemoryUserClickHitCounterCache implements HitCounterCache<AuthorStatisticKey, UUID> {
 
     private final ConcurrentMap<AuthorStatisticKey, Set<UUID>> cache;
     private final Predicate<AuthorStatisticKey> cleanupPredicate;
 
-    public UserClickHitCounterCache() {
+    public InMemoryUserClickHitCounterCache() {
         this(null);
     }
 
-    public UserClickHitCounterCache(Predicate<AuthorStatisticKey> cleanupPredicate) {
+    public InMemoryUserClickHitCounterCache(Predicate<AuthorStatisticKey> cleanupPredicate) {
         this.cache = new ConcurrentHashMap<>();
         this.cleanupPredicate = Objects.requireNonNullElse(cleanupPredicate,
                 _ -> false);

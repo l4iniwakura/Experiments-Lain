@@ -1,4 +1,4 @@
-package com.github.l4iniwakura.feed.view.counter.core;
+package com.github.l4iniwakura.feed.view.counter.domain;
 
 import java.time.LocalDate;
 import java.util.UUID;

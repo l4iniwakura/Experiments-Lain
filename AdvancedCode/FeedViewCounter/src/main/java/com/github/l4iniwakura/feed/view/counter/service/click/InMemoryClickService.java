@@ -1,7 +1,8 @@
 package com.github.l4iniwakura.feed.view.counter.service.click;
 
-import com.github.l4iniwakura.feed.view.counter.core.AuthorStatisticKey;
-import com.github.l4iniwakura.feed.view.counter.domain.AuthorMetric;
+import com.github.l4iniwakura.feed.view.counter.common.ClickEvent;
+import com.github.l4iniwakura.feed.view.counter.domain.AuthorStatisticKey;
+import com.github.l4iniwakura.feed.view.counter.common.AuthorMetric;
 import com.github.l4iniwakura.feed.view.counter.repository.HitCounterCache;
 import com.github.l4iniwakura.feed.view.counter.service.time.ITimeService;
 
@@ -22,7 +23,10 @@ public class InMemoryClickService implements IClickService {
     }
 
     @Override
-    public void processClickEvent(UUID userId, UUID authorId) {
+    public void processClickEvent(final ClickEvent clickEvent) {
+        Objects.requireNonNull(clickEvent);
+        var userId = clickEvent.userId();
+        var authorId = clickEvent.authorId();
         Objects.requireNonNull(userId);
         Objects.requireNonNull(authorId);
 

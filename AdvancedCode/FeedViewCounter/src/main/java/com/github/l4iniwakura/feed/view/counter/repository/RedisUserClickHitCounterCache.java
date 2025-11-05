@@ -1,6 +1,6 @@
 package com.github.l4iniwakura.feed.view.counter.repository;
 
-import com.github.l4iniwakura.feed.view.counter.core.AuthorStatisticKey;
+import com.github.l4iniwakura.feed.view.counter.domain.AuthorStatisticKey;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
@@ -9,7 +9,7 @@ import java.time.Duration;
 import java.util.UUID;
 import java.util.concurrent.ScheduledExecutorService;
 
-public class RedisClickHitCounterCache implements HitCounterCache<AuthorStatisticKey, UUID>, AutoCloseable {
+public class RedisUserClickHitCounterCache implements HitCounterCache<AuthorStatisticKey, UUID>, AutoCloseable {
 
     private static final Duration TTL = Duration.ofDays(2);
 
@@ -17,7 +17,7 @@ public class RedisClickHitCounterCache implements HitCounterCache<AuthorStatisti
     private final StatefulRedisConnection<String, String> connection;
     private final RedisCommands<String, String> commands;
 
-    public RedisClickHitCounterCache(RedisClient redisClient) {
+    public RedisUserClickHitCounterCache(RedisClient redisClient) {
         this.redisClient = redisClient;
         this.connection = redisClient.connect();
         this.commands = connection.sync();
